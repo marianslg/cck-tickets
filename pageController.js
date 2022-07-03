@@ -20,11 +20,17 @@ async function getEvents(from, to) {
     var result = []
 
     //browser = await puppeteer.launch({})
-    browser = await puppeteer.launch({
+    /*browser = await puppeteer.launch({
         headless: false,
         args: ["--disable-setuid-sandbox"],
         'ignoreHTTPSErrors': true
-    })
+    })*/
+    const browser = await puppeteer.launch({
+        'args': [
+            '--no-sandbox',
+            '--disable-setuid-sandbox'
+        ]
+    });
 
     let host = 'https://itecno.com.ar/cckirchner/index.asp?event='
 
