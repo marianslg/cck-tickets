@@ -19,7 +19,12 @@ const scraper = require('./pageScraper');
 async function getEvents(from, to) {
     var result = []
 
-    browser = await puppeteer.launch({})
+    //browser = await puppeteer.launch({})
+    browser = await launch({
+        headless: false,
+        args: ["--disable-setuid-sandbox"],
+        'ignoreHTTPSErrors': true
+    })
 
     let host = 'https://itecno.com.ar/cckirchner/index.asp?event='
 
