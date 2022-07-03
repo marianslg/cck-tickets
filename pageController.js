@@ -20,7 +20,7 @@ async function getEvents(from, to) {
     var result = []
 
     //browser = await puppeteer.launch({})
-    browser = await launch({
+    browser = await puppeteer.launch({
         headless: false,
         args: ["--disable-setuid-sandbox"],
         'ignoreHTTPSErrors': true
