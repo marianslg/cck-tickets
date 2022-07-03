@@ -9,7 +9,7 @@ app.get('/', async(req, res) => {
 })
 
 app.get('/getEvents', async(req, res) => {
-    res.send(await getEvents(295, 310));
+    res.send(await getEvents(295, 300));
 })
 
 app.listen(port, () => {

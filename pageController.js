@@ -38,6 +38,11 @@ async function getEvents(from, to) {
         let url = host.concat(i)
         let text = await scraper(browser, url);
 
+        console.log({
+            url,
+            text
+        })
+
         result.push({
             url,
             text
