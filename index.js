@@ -9,7 +9,16 @@ app.get('/', async(req, res) => {
 })
 
 app.get('/getEvents', async(req, res) => {
-    res.send(await getEvents(295, 300));
+    let url = 'https://itecno.com.ar/cckirchner/index.asp?event='.concat(req.query.id)
+
+    try {
+        res.status(200).send(await getEvents(url));
+    } catch (ex) {
+        res.status(400).send({
+            url,
+            ex
+        })
+    }
 })
 
 app.listen(port, () => {
