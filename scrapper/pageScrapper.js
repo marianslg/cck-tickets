@@ -1,4 +1,4 @@
-async function scraper(browser, url) {
+async function scrapper(browser, url) {
     const page = await browser.newPage()
 
     await page.goto(url)
@@ -7,4 +7,4 @@ async function scraper(browser, url) {
     return await page.$eval('div.gtr-uniform > div.col-6 > label', el => el.innerText)
 }
 
-module.exports = scraper;
+module.exports = scrapper
