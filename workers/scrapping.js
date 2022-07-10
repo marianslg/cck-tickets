@@ -3,7 +3,7 @@ const dbController = require('../db/dbController');
 
 const URL_BASE = `https://itecno.com.ar/cckirchner/index.asp?event=`
 
-async function scrapingAndSaveEvents() {
+async function scrappingAndSaveEvents() {
     let events = []
 
     lastId = dbController.getLastestId()
@@ -14,7 +14,7 @@ async function scrapingAndSaveEvents() {
     do {
         let url = URL_BASE + lastId;
 
-        let event = await scrapper.scrapperEvent(url);
+        console.log(`scrapping ${url}`)
 
         if (event != `Apellido y Nombre`) {
             events.push({
@@ -38,4 +38,4 @@ async function scrapingAndSaveEvents() {
 
 }
 
-exports.scrapingAndSaveEvents = scrapingAndSaveEvents;
+exports.scrappingAndSaveEvents = scrappingAndSaveEvents;
