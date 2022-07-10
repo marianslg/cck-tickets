@@ -6,7 +6,7 @@ function getEvents() {
     if (fs.existsSync(EVENTS_FILE))
         return JSON.parse(fs.readFileSync(EVENTS_FILE));
     else
-        throw `FileNotFound`
+        throw `FileNotFound.`
 }
 
 function getLastestId() {
