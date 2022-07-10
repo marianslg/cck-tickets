@@ -14,7 +14,7 @@ async function scrappingAndSaveEvents() {
     do {
         let url = URL_BASE + lastId;
 
-        console.log(`scrapping ${url}`)
+        let event = await scrapper.scrapperEvent(url);
 
         if (event != `Apellido y Nombre`) {
             events.push({
