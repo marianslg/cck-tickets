@@ -26,4 +26,4 @@ app.listen(port, () => {
 
 scrapping.scrappingAndSaveEvents()
 
-setInterval(scrapping.scrappingAndSaveEvents, 1000 * 60 * 60)
+//setInterval(scrapping.scrappingAndSaveEvents, 1000 * 60 * 60)
