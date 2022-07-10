@@ -25,10 +25,6 @@ app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
 
-const EVENTS_FILE = path.join(__dirname, '\\data\\events.json')
-
-console.log(EVENTS_FILE)
-
 scrapping.start()
 
 setInterval(scrapping.start, 1000 * 60 * 60)

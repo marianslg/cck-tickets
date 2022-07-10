@@ -1,9 +1,7 @@
 var fs = require('fs')
 var path = require('path');
 
-const EVENTS_FILE = path.join(__dirname, '\\data\\events.json')
-
-//const EVENTS_FILE = __dirname + `\\data\\events.json`
+const EVENTS_FILE = path.join(__dirname, 'data', 'events.json');
 
 function getEvents() {
     console.log(EVENTS_FILE)
