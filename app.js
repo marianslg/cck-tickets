@@ -2,6 +2,7 @@ const express = require('express')
 
 const scrapping = require('./workers/scrapping')
 const dbController = require('./db/dbController')
+var path = require('path');
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -23,6 +24,10 @@ app.get('/getAllEvents', async(req, res) => {
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
+
+const EVENTS_FILE = path.join(__dirname, '\\data\\events.json')
+
+console.log(EVENTS_FILE)
 
 scrapping.start()
 
