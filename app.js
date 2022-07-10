@@ -24,6 +24,6 @@ app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
 
-scrapping.scrappingAndSaveEvents()
+scrapping.start()
 
-//setInterval(scrapping.scrappingAndSaveEvents, 1000 * 60 * 60)
+setInterval(scrapping.start, 1000 * 60 * 60)

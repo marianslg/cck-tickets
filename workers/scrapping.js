@@ -35,7 +35,14 @@ async function scrappingAndSaveEvents() {
         lastId++;
         counter++;
     } while (counter < target)
-
 }
 
-exports.scrappingAndSaveEvents = scrappingAndSaveEvents;
+function start() {
+    try {
+        scrappingAndSaveEvents()
+    } catch (ex) {
+        console.error(ex)
+    }
+}
+
+exports.start = start;
