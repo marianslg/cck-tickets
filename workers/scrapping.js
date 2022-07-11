@@ -17,10 +17,16 @@ async function scrappingAndSaveEvents() {
         let event = await scrapper.scrapperEvent(url);
 
         if (event != `Apellido y Nombre`) {
+            const dataEvent = extractDataEvent(event)
+
             events.push({
                 id: lastId,
                 url,
-                event
+                event,
+                soldOut: dataEvent.soldOut,
+                name: dataEvent.name,
+                date: dataEvent.date,
+                time: dataEvent.time
             });
 
             dbController.saveEvents(events);
@@ -35,6 +41,40 @@ async function scrappingAndSaveEvents() {
         lastId++;
         counter++;
     } while (counter < target)
+}
+
+function extractDataEvent(event) {
+    const extract = event.split('-')
+
+    switch (extract.length) {
+        case 3:
+            {
+                return {
+                    "soldOut": false,
+                    "name": extract[0].trim(),
+                    "date": extract[1].trim(),
+                    "time": extract[2].trim(),
+                }
+            }
+        case 4:
+            {
+                return {
+                    "soldOut": true,
+                    "name": extract[1].trim(),
+                    "date": extract[2].trim(),
+                    "time": extract[3].trim(),
+                }
+            }
+        default:
+            {
+                return {
+                    "soldOut": null,
+                    "name": null,
+                    "date": null,
+                    "time": null,
+                }
+            }
+    }
 }
 
 function start() {
