@@ -43,7 +43,6 @@ async function scrappingAndSaveEvents() {
     } while (counter < target)
 }
 
-<<<<<<< HEAD
 function extractDataEvent(event) {
     const extract = event.split('-')
 
@@ -79,9 +78,6 @@ function extractDataEvent(event) {
 }
 
 function start() {
-=======
-async function start() {
->>>>>>> 8d7327bf8a497ba30f2f699da65d65ceef95769a
     try {
         await scrappingAndSaveEvents()
     } catch (ex) {
