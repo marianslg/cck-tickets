@@ -79,7 +79,7 @@ function extractDataEvent(event) {
 
 function start() {
     try {
-        scrappingAndSaveEvents()
+        await scrappingAndSaveEvents()
     } catch (ex) {
         console.error(ex)
     }
