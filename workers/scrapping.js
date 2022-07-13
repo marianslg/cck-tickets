@@ -1,5 +1,5 @@
-const scrapper = require('../scrapper/scrapper');
-const dbController = require('../db/dbController');
+const scrapper = require('../scrapper/scrapper')
+const dbController = require('../db/dbController')
 
 const URL_BASE = `https://itecno.com.ar/cckirchner/index.asp?event=`
 
@@ -8,73 +8,36 @@ async function scrappingAndSaveEvents() {
 
     lastId = dbController.getLastestId()
 
-    let counter = 0;
-    let target = 1;
+    if (lastId == 0) lastId = 290 // Si no hay nada en la BD empiezo a analizar las URL desde el ID 290
+
+    let counter = 0
+    let target = 1
+    const RANGE = 5 //Luego de encontrar el ultimo evento, pruebo en buscar los 5 ID siguientes.
+    const LIMIT = 300 // Limite de busqueda. Si al superarlo no encuentro ningun evento, termino la instrucción.
 
     do {
         let url = URL_BASE + lastId;
 
         let event = await scrapper.scrapperEvent(url);
 
-        if (event != `Apellido y Nombre`) {
-            const dataEvent = extractDataEvent(event)
-
+        if (event.text != `Apellido y Nombre`) {
             events.push({
                 id: lastId,
-                url,
-                event,
-                soldOut: dataEvent.soldOut,
-                name: dataEvent.name,
-                date: dataEvent.date,
-                time: dataEvent.time
+                url: event.url,
+                event: event.text,
+                data: event.data
             });
 
-            dbController.saveEvents(events);
+            dbController.saveEvents(events)
 
-            target = lastId + 1
+            target = counter + RANGE
         } else if (counter == 0) {
-            target = 300
-        } else if (events.length > 0) {
-            target = 0
+            target = LIMIT
         }
 
-        lastId++;
-        counter++;
+        lastId++
+        counter++
     } while (counter < target)
-}
-
-function extractDataEvent(event) {
-    const extract = event.split('-')
-
-    switch (extract.length) {
-        case 3:
-            {
-                return {
-                    "soldOut": false,
-                    "name": extract[0].trim(),
-                    "date": extract[1].trim(),
-                    "time": extract[2].trim(),
-                }
-            }
-        case 4:
-            {
-                return {
-                    "soldOut": true,
-                    "name": extract[1].trim(),
-                    "date": extract[2].trim(),
-                    "time": extract[3].trim(),
-                }
-            }
-        default:
-            {
-                return {
-                    "soldOut": null,
-                    "name": null,
-                    "date": null,
-                    "time": null,
-                }
-            }
-    }
 }
 
 function start() {
@@ -85,4 +48,28 @@ function start() {
     }
 }
 
-exports.start = start;
+async function scrapEvent() {
+    let url = URL_BASE + '330';
+
+    console.log("-------------------------------------------------------------------")
+
+    console.log(await scrapper.scrapperEvent(URL_BASE + '333'))
+    console.log("-------------------------------------------------------------------")
+
+    console.log(await scrapper.scrapperEvent(URL_BASE + '328'))
+    console.log("-------------------------------------------------------------------")
+
+    console.log(await scrapper.scrapperEvent(URL_BASE + '317')) // agotado
+    console.log("-------------------------------------------------------------------")
+
+    console.log(await scrapper.scrapperEvent(URL_BASE + '33'))
+
+    let event = await scrapper.scrapperEvent(url);
+
+
+    if (event != `Apellido y Nombre`) {
+
+    }
+}
+
+exports.start = start

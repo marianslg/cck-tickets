@@ -9,13 +9,13 @@ async function scrapperEvent(url) {
         ]
     });
 
-    let text = await scrapper(browser, url)
+    let event = await scrapper(browser, url)
 
     browser.close()
 
-    console.log(`scrapperEvent ${url} : ${text}`)
+    console.log(`scrapperEvent ${url} : ${event.text}`)
 
-    return text
+    return event
 }
 
 exports.scrapperEvent = scrapperEvent

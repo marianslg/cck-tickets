@@ -16,7 +16,7 @@ function getLastestId() {
     const events = getEvents()
 
     if (events.length == 0)
-        return 290;
+        return 0;
     else {
         const eventsId = events.map(function(v) {
             return v.id
