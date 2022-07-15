@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000
 process.env.TZ = "America/Argentina/Buenos_Aires"
 
 var corsOptions = {
-    origin: 'https://marianslg.github.io/cck-tickets-front',
+    origin: 'https://marianslg.github.io',
     optionsSuccessStatus: 200
 }
 
