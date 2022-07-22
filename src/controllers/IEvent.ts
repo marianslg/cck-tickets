@@ -3,7 +3,7 @@ export interface IEvent {
     url: string
     event?: string | null,
     name?: string,
-    souldOut?: number,
+    soldOut?: number,
     eventDate?: string,
     eventTime?: string,
     reserve?: string

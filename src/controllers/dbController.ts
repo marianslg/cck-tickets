@@ -32,8 +32,8 @@ export async function saveEventOnDB(event: IEvent) {
 async function insert(event: IEvent) {
     db = await openDb()
 
-    const output = await db.run(`INSERT INTO Events(id,url,event,name,souldOut,eventDate,eventTime,reserve,creationDatetime) VALUES(?,?,?,?,?,?,?,?,?)`,
-        event.id, event.url, event.event, event.name, event.souldOut, event.eventDate, event.eventTime, event.reserve, new Date().toISOString())
+    const output = await db.run(`INSERT INTO Events(id,url,event,name,soldOut,eventDate,eventTime,reserve,creationDatetime) VALUES(?,?,?,?,?,?,?,?,?)`,
+        event.id, event.url, event.event, event.name, event.soldOut, event.eventDate, event.eventTime, event.reserve, new Date().toISOString())
 
     db.close();
 }
@@ -41,8 +41,8 @@ async function insert(event: IEvent) {
 async function update(event: IEvent) {
     db = await openDb()
 
-    const output = await db.run(`UPDATE Events SET url = ?,event = ?,name = ?,souldOut = ?,eventDate = ?,eventTime = ?,reserve = ?, updateDatetime = ? WHERE id = ?`,
-        event.url, event.event, event.name, event.souldOut, event.eventDate, event.eventTime, event.reserve, new Date().toISOString(), event.id)
+    const output = await db.run(`UPDATE Events SET url = ?,event = ?,name = ?,soldOut = ?,eventDate = ?,eventTime = ?,reserve = ?, updateDatetime = ? WHERE id = ?`,
+        event.url, event.event, event.name, event.soldOut, event.eventDate, event.eventTime, event.reserve, new Date().toISOString(), event.id)
 
     db.close();
 }

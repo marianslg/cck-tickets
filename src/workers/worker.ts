@@ -39,7 +39,7 @@ export class Worker {
                         url: url,
                         event: event.text,
                         name: event.eventName,
-                        souldOut: event.eventSoldOut,
+                        soldOut: event.eventSoldOut,
                         eventDate: event.eventDate,
                         eventTime: event.eventTime,
                         reserve: event.eventReserve
@@ -73,7 +73,7 @@ export class Worker {
                 url: this.URL_BASE + id,
                 event: event.text,
                 name: event.eventName,
-                souldOut: event.eventSoldOut,
+                soldOut: event.eventSoldOut,
                 eventDate: event.eventDate,
                 eventTime: event.eventTime,
                 reserve: event.eventReserve
