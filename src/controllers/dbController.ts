@@ -1,12 +1,13 @@
 import { IEvent } from "./IEvent"
 import sqlite3 from 'sqlite3'
 import { Database, open } from 'sqlite'
+import path from 'path';
 
 let db: Database
 
 export async function openDb() {
     return open({
-        filename: process.cwd() + '\\sqlite\\database.db',
+        filename: path.join(process.cwd() , 'sqlite', 'database.db'),
         driver: sqlite3.Database
     })
 }
