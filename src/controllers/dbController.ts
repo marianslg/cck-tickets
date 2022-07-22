@@ -12,33 +12,20 @@ export async function openDb() {
 }
 
 export async function getAllEventsFromDataBase(): Promise<string> {
-    try {
-        const db = await openDb()
+    const db = await openDb()
 
-        db.each("SELECT * FROM Events", (err, row) => {
-            if (err) {
-                console.error(`getAllEvents - ${err.message}`);
-            } else {
-                return JSON.stringify(row);
-            }
-        });
-    }
-    catch (ex) {
-        console.error(`connect - ${ex}`);
-    }
+    const result = await db.all(`SELECT * FROM Events`)
 
-    return ""
+    db.close()
+
+    return JSON.stringify(result)
 }
 
 export async function saveEventOnDB(event: IEvent) {
-    //db = await openDb()
-
     if (await existeEvent(event.id))
         await update(event)
     else
         await insert(event)
-
-    //db.close();
 }
 
 async function insert(event: IEvent) {
@@ -51,6 +38,8 @@ async function insert(event: IEvent) {
 }
 
 async function update(event: IEvent) {
+    db = await openDb()
+
     const output = await db.run(`UPDATE Events SET url = ?,event = ?,name = ?,souldOut = ?,eventDate = ?,eventTime = ?,reserve = ?, updateDatetime = ? WHERE id = ?`,
         event.url, event.event, event.name, event.souldOut, event.eventDate, event.eventTime, event.reserve, new Date().toISOString(), event.id)
 
@@ -61,6 +50,8 @@ async function existeEvent(id: number): Promise<any> {
     db = await openDb()
 
     const output = await db.all(`SELECT COUNT(*) AS Cantidad FROM Events WHERE id = ?`, id)
+
+    db.close();
 
     return (output[0].Cantidad == 1)
 }

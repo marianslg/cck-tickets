@@ -3,8 +3,8 @@ import { getAllEventsFromDataBase } from '../controllers/dbController'
 
 const router = Router()
 
-router.route('/getAllEvents').get((req: Request, res: Response) => {
-    res.json(getAllEventsFromDataBase())
+router.route('/getAllEvents').get(async (req: Request, res: Response) => {
+    res.json(await getAllEventsFromDataBase())
 })
 
 export default router
