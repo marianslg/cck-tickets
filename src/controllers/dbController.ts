@@ -12,14 +12,14 @@ export async function openDb() {
     })
 }
 
-export async function getAllEventsFromDataBase(): Promise<string> {
+export async function getAllEventsFromDataBase(): Promise<any> {
     const db = await openDb()
 
     const result = await db.all(`SELECT * FROM Events`)
 
     db.close()
 
-    return JSON.stringify(result)
+    return result
 }
 
 export async function saveEventOnDB(event: IEvent) {
