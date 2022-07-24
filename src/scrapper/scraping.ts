@@ -60,7 +60,7 @@ function extractDataEventType2(eventText: string): ScrapingDataResult {
     else if (extract.length == 8) {
         result.eventSoldOut = 0
         result.eventName = extract[2].trim().split('   ')[0].trim()
-        result.eventDate = extract[2].trim().split('   ')[1].split('-')[0].trim()
+        result.eventDate = getDate(extract[2].trim().split('   ')[1].split('-')[0].trim())
         result.eventTime = extract[2].trim().split('   ')[1].split('-')[1].trim()
         result.eventReserve = extract[5].trim()
         return result
@@ -79,13 +79,13 @@ function extractDataEventType1(eventText: string): ScrapingDataResult {
                 if (extract[0].trim().toUpperCase() == 'AGOTADO') {
                     result.eventSoldOut = 1
                     result.eventName = extract[1].trim()
-                    result.eventDate = extract[2].trim()
+                    result.eventDate = getDate(extract[2].trim())
 
                     return result
                 } else {
                     result.eventSoldOut = 0
                     result.eventName = extract[0].trim()
-                    result.eventDate = extract[1].trim()
+                    result.eventDate = getDate(extract[1].trim())
                     result.eventTime = extract[2].trim()
 
                     return result
@@ -95,7 +95,7 @@ function extractDataEventType1(eventText: string): ScrapingDataResult {
             {
                 result.eventSoldOut = 1
                 result.eventName = extract[0].trim()
-                result.eventDate = extract[1].trim()
+                result.eventDate = getDate(extract[1].trim())
                 result.eventTime = extract[2].trim()
 
                 return result
@@ -105,5 +105,16 @@ function extractDataEventType1(eventText: string): ScrapingDataResult {
                 return result
             }
 
+    }    
+}
+
+function getDate(date: string): string {
+    var pattern = /([A-Za-zÁÉÍÓÚáéíóúñÑ]+), (\d+) de (\w+) de (\d+)/;
+
+    if (pattern.test(date)) {
+        return new Date(date.replace(pattern, '$3 $2, $4')).toISOString()
+    }
+    else {
+        return date
     }
 }

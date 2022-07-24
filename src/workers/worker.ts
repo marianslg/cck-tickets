@@ -79,8 +79,11 @@ export class Worker {
                 reserve: event.eventReserve
             }
 
-            getAllEventsFromDataBase()
-            await saveEventOnDB(newEvent)
+            console.log(newEvent)
+
+
+            //getAllEventsFromDataBase()
+            //await saveEventOnDB(newEvent)
         } catch (ex) {
             console.error(ex)
         } finally {
