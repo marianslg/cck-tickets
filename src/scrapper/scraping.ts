@@ -105,14 +105,20 @@ function extractDataEventType1(eventText: string): ScrapingDataResult {
                 return result
             }
 
-    }    
+    }
 }
+
+var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
 function getDate(date: string): string {
     var pattern = /([A-Za-zÁÉÍÓÚáéíóúñÑ]+), (\d+) de (\w+) de (\d+)/;
 
     if (pattern.test(date)) {
-        return new Date(date.replace(pattern, '$3 $2, $4')).toISOString()
+        const day = parseInt(date.replace(pattern, '$2'))
+        const month = meses.indexOf(date.replace(pattern, '$3'))
+        const year = parseInt(date.replace(pattern, '$4'))
+
+        return new Date(year, month, day).toISOString()
     }
     else {
         return date
