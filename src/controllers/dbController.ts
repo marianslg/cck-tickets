@@ -22,6 +22,16 @@ export async function getAllEventsFromDataBase(): Promise<any> {
     return result
 }
 
+export async function getAllFutureEventsFromDataBase(): Promise<any> {
+    const db = await openDb()
+
+    const result = await db.all(`SELECT * FROM Events WHERE eventDate >= '${new Date().toISOString()}'`)
+
+    db.close()
+
+    return result
+}
+
 export async function saveEventOnDB(event: IEvent) {
     if (await existeEvent(event.id))
         await update(event)
