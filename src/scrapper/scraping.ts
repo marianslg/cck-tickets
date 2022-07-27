@@ -112,11 +112,13 @@ var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "ag
 
 function getDate(date: string): string {
     var pattern = /([A-Za-zÁÉÍÓÚáéíóúñÑ]+), (\d+) de (\w+) de (\d+)/;
-
     if (pattern.test(date)) {
         const day = parseInt(date.replace(pattern, '$2'))
         const month = meses.indexOf(date.replace(pattern, '$3'))
         const year = parseInt(date.replace(pattern, '$4'))
+
+        console.log("date:", date)
+        console.log("year, month, date: ", `${year}, ${month}, ${day}`)
 
         return new Date(year, month, day).toISOString()
     }
