@@ -1,6 +1,12 @@
 import express, { Application} from 'express'
 import eventsRoutes from './routes/events.routes'
 import indexRoutes from './routes/index.routes'
+import cors from "cors";
+
+const corsOptions = {
+    origin: 'https://marianslg.github.io',
+    optionsSuccessStatus: 200
+}
 
 export class Server {
     app: Application
@@ -11,7 +17,8 @@ export class Server {
         this.init()
 
         this.app.use(indexRoutes)
-        this.app.use(eventsRoutes)        
+        this.app.use(eventsRoutes)
+        this.app.use(cors(corsOptions))
     }
 
     private init() {
